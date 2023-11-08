@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tasks</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_action">Login</string>
+    <string name="does_not_have_an_account">Don\'t have an account?</string>
+    <string name="register_action">Register</string>
+</resources>
