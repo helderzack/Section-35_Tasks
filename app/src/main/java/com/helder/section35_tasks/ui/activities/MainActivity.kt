@@ -1,4 +1,4 @@
-package com.helder.section35_tasks
+package com.helder.section35_tasks.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
