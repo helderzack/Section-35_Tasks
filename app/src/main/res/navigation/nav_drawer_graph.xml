@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_drawer_graph"
+    app:startDestination="@id/all_tasks_fragment">
+    <fragment
+        android:id="@+id/all_tasks_fragment"
+        android:name="com.helder.section35_tasks.ui.fragments.AllTasksFragment"
+        android:label="All Tasks Fragment"
+        tools:layout="@layout/tasks_fragments_layout" />
+    <fragment
+        android:id="@+id/next_seven_days_tasks_fragment"
+        android:name="com.helder.section35_tasks.ui.fragments.NextSevenDaysTasksFragment"
+        android:label="Next Seven Days Tasks Fragment"
+        tools:layout="@layout/tasks_fragments_layout" />
+    <fragment
+        android:id="@+id/expired_tasks_fragment"
+        android:name="com.helder.section35_tasks.ui.fragments.ExpiredTasksFragment"
+        android:label="Expired Tasks Fragment"
+        tools:layout="@layout/tasks_fragments_layout" />
+</navigation>
