@@ -2,4 +2,18 @@
 <resources>
     <dimen name="edit_text_max_width">488dp</dimen>
     <dimen name="touch_target_height">48dp</dimen>
+    <dimen name="button_max_width">488dp</dimen>
+
+    <dimen name="margin_one_third">4dp</dimen>
+    <dimen name="margin_half">8dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_double">32dp</dimen>
+    <dimen name="margin_quadruple">64dp</dimen>
+
+    <dimen name="full_constraint_width">0dp</dimen>
+    <dimen name="full_constraint_height">0dp</dimen>
+
+    <dimen name="text_size_default">8sp</dimen>
+    <dimen name="text_size_double">16sp</dimen>
+    <dimen name="text_size_triple">24sp</dimen>
 </resources>

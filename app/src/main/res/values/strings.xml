@@ -10,4 +10,11 @@
     <string name="app_logo">App Logo</string>
     <string name="navigation_drawer_open">Open Drawer</string>
     <string name="navigation_drawer_close">Close Drawer</string>
+    <string name="description_hint">Description</string>
+    <string name="user_name_placeholder">User</string>
+    <string name="open_add_task_activity">Open Add Task Activity Button</string>
+    <string name="add_task_action">ADD TASK</string>
+    <string name="priority_spinner_title">Priority</string>
+    <string name="complete_checkbox">Complete</string>
+    <string name="limit_date_action">Click to select the limit date</string>
 </resources>

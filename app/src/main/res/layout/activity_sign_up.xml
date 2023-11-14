@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.RegisterActivity">
+    tools:context=".ui.activities.SignUpActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
@@ -36,7 +36,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/full_constraint_width"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
 
     <EditText
         android:id="@+id/edit_name"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/full_constraint_width"
         android:layout_height="@dimen/touch_target_height"
         android:autofillHints="emailAddress"
         android:hint="@string/name_hint"
@@ -57,9 +57,9 @@
 
     <EditText
         android:id="@+id/edit_email"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/full_constraint_width"
         android:layout_height="@dimen/touch_target_height"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_default"
         android:autofillHints="emailAddress"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
@@ -70,9 +70,9 @@
 
     <EditText
         android:id="@+id/edit_password"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/full_constraint_width"
         android:layout_height="@dimen/touch_target_height"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_default"
         android:autofillHints="password"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
@@ -85,7 +85,7 @@
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="@dimen/margin_quadruple"
         android:backgroundTint="?attr/colorPrimary"
         android:text="@string/register_action"
         android:textColor="?attr/colorOnPrimary"

@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.textCreateAccountAction.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
             finish()
         }
 
