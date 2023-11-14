@@ -34,7 +34,9 @@ to GitHub.
 ## Valuable Resources
 
 Add Spinners to your app: https://developer.android.com/develop/ui/views/components/spinner
+
 Add checkboxes to your app: https://developer.android.com/develop/ui/views/components/checkbox
+
 Add pickers to your app: https://developer.android.com/develop/ui/views/components/pickers
 
 ## Link to previous lesson from the course
