@@ -39,6 +39,10 @@ Add checkboxes to your app: https://developer.android.com/develop/ui/views/compo
 
 Add pickers to your app: https://developer.android.com/develop/ui/views/components/pickers
 
+Date and Time Formatting in Android: https://www.geeksforgeeks.org/date-and-time-formatting-in-android/
+
+Setting Custom ActionBar Title from Fragment: https://www.youtube.com/watch?v=EJMrXwKiJOw
+
 ## Link to previous lesson from the course
 
 [Section 31 - Guests](https://github.com/helderzack/section-31st_guests)

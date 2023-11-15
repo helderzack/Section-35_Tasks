@@ -6,13 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
 import com.helder.section35_tasks.ui.activities.AddTaskActivity
+import com.helder.section35_tasks.ui.adapters.TasksAdapter
+import com.helder.section35_tasks.ui.viewmodel.TasksViewModel
 
 abstract class BaseFragment : Fragment() {
 
     private var _binding: TasksFragmentsLayoutBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: TasksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +30,16 @@ abstract class BaseFragment : Fragment() {
             startActivity(Intent(requireContext(), AddTaskActivity::class.java))
         }
 
+        viewModel = ViewModelProvider(this)[TasksViewModel::class.java]
+
+        val adapter  = TasksAdapter()
+        adapter.setData(viewModel.getData())
+
+        binding.recyclerViewTasks.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewTasks.adapter = adapter
+
+        setToolbarTitle()
+
         return binding.root
     }
 
@@ -32,4 +47,6 @@ abstract class BaseFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    abstract fun setToolbarTitle()
 }

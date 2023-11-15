@@ -1,4 +1,8 @@
 package com.helder.section35_tasks.ui.fragments
 
-class ExpiredTasksFragment: BaseFragment() {
+class ExpiredTasksFragment : BaseFragment() {
+
+    override fun setToolbarTitle() {
+        activity?.title = "Expired Tasks"
+    }
 }
