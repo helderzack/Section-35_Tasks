@@ -43,6 +43,8 @@ Date and Time Formatting in Android: https://www.geeksforgeeks.org/date-and-time
 
 Setting Custom ActionBar Title from Fragment: https://www.youtube.com/watch?v=EJMrXwKiJOw
 
+Implement Email Validator in Android: https://www.geeksforgeeks.org/implement-email-validator-in-android/
+
 ## Link to previous lesson from the course
 
 [Section 31 - Guests](https://github.com/helderzack/section-31st_guests)

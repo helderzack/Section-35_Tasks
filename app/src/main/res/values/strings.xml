@@ -17,4 +17,6 @@
     <string name="priority_spinner_title">Priority</string>
     <string name="complete_checkbox">Complete</string>
     <string name="limit_date_action">Click to select the limit date</string>
+    <string name="invalid_email_address_alert">Please enter a valid email address!</string>
+    <string name="invalid_password_alert">Please enter a valid password!</string>
 </resources>
