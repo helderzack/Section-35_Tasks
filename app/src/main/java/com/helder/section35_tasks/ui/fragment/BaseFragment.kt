@@ -1,4 +1,4 @@
-package com.helder.section35_tasks.ui.fragments
+package com.helder.section35_tasks.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
-import com.helder.section35_tasks.ui.activities.AddTaskActivity
-import com.helder.section35_tasks.ui.adapters.TasksAdapter
+import com.helder.section35_tasks.ui.activity.AddTaskActivity
+import com.helder.section35_tasks.ui.adapter.TasksAdapter
 import com.helder.section35_tasks.ui.viewmodel.TasksViewModel
 
 abstract class BaseFragment : Fragment() {

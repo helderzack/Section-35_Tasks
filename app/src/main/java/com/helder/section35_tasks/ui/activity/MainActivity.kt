@@ -1,4 +1,4 @@
-package com.helder.section35_tasks.ui.activities
+package com.helder.section35_tasks.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

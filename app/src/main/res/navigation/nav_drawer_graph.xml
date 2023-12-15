@@ -6,17 +6,17 @@
     app:startDestination="@id/all_tasks_fragment">
     <fragment
         android:id="@+id/all_tasks_fragment"
-        android:name="com.helder.section35_tasks.ui.fragments.AllTasksFragment"
+        android:name="com.helder.section35_tasks.ui.fragment.AllTasksFragment"
         android:label="All Tasks Fragment"
         tools:layout="@layout/tasks_fragments_layout" />
     <fragment
         android:id="@+id/next_seven_days_tasks_fragment"
-        android:name="com.helder.section35_tasks.ui.fragments.NextSevenDaysTasksFragment"
+        android:name="com.helder.section35_tasks.ui.fragment.NextSevenDaysTasksFragment"
         android:label="Next Seven Days Tasks Fragment"
         tools:layout="@layout/tasks_fragments_layout" />
     <fragment
         android:id="@+id/expired_tasks_fragment"
-        android:name="com.helder.section35_tasks.ui.fragments.ExpiredTasksFragment"
+        android:name="com.helder.section35_tasks.ui.fragment.ExpiredTasksFragment"
         android:label="Expired Tasks Fragment"
         tools:layout="@layout/tasks_fragments_layout" />
 </navigation>

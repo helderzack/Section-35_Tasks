@@ -1,10 +1,11 @@
-package com.helder.section35_tasks.ui.adapters
+package com.helder.section35_tasks.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TaskItemBinding
+import com.helder.section35_tasks.ui.viewholder.TasksViewHolder
 
 class TasksAdapter: RecyclerView.Adapter<TasksViewHolder>() {
     private lateinit var binding: TaskItemBinding

@@ -1,4 +1,4 @@
-package com.helder.section35_tasks.ui.fragments
+package com.helder.section35_tasks.ui.fragment
 
 import android.app.DatePickerDialog
 import android.app.Dialog

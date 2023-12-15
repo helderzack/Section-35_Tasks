@@ -1,4 +1,4 @@
-package com.helder.section35_tasks.ui.adapters
+package com.helder.section35_tasks.ui.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.data.model.TaskModel

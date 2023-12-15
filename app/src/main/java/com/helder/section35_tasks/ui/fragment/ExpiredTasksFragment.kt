@@ -1,4 +1,4 @@
-package com.helder.section35_tasks.ui.fragments
+package com.helder.section35_tasks.ui.fragment
 
 class ExpiredTasksFragment : BaseFragment() {
 

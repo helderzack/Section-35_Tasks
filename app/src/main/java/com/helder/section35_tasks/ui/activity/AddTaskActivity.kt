@@ -1,4 +1,4 @@
-package com.helder.section35_tasks.ui.activities
+package com.helder.section35_tasks.ui.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.helder.section35_tasks.R
 import com.helder.section35_tasks.databinding.ActivityAddTaskBinding
-import com.helder.section35_tasks.ui.fragments.DatePickerFragment
+import com.helder.section35_tasks.ui.fragment.DatePickerFragment
 
 class AddTaskActivity : AppCompatActivity(), OnClickListener, AdapterView.OnItemSelectedListener {
 
