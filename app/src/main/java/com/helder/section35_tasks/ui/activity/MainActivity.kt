@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,6 +16,8 @@ import androidx.navigation.ui.navigateUp
 import com.google.android.material.navigation.NavigationView
 import com.helder.section35_tasks.R
 import com.helder.section35_tasks.databinding.ActivityMainBinding
+import com.helder.section35_tasks.ui.viewmodel.MainViewModel
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -22,12 +25,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
     private lateinit var navView: NavigationView
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.baseLayout.baseLayoutToolbar)
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         navView = binding.navView
 
@@ -61,6 +67,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setCheckedItem(R.id.all_tasks)
         navView.setNavigationItemSelectedListener(this)
+
+        observe()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -83,8 +91,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.logout -> {
                 //Change this to a navigation action later
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+                viewModel.doLogout()
             }
         }
 
@@ -92,4 +99,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         return true
     }
+
+    private fun observe() {
+        viewModel.logout.observe(this) {
+            if(it) {
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                finish()
+            }
+        }
+    }
+
 }

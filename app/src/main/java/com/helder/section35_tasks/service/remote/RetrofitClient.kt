@@ -44,5 +44,10 @@ class RetrofitClient private constructor() {
             this.token = token
             this.personKey = personKey
         }
+
+        fun removeHeaders() {
+            this.token = ""
+            this.personKey = ""
+        }
     }
 }
