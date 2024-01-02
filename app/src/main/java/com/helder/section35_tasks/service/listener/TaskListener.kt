@@ -1,8 +1,8 @@
 package com.helder.section35_tasks.service.listener
 
-interface APIListener<T> {
+interface TaskListener<T> {
 
-    fun onSuccess(result: T)
+    fun onSuccess(result: List<T>)
 
     fun onFailure(message: String)
 }

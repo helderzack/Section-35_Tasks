@@ -36,6 +36,7 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
         viewModel.verifyLoggedUser()
 
         observe()
+
     }
 
     private fun observe() {
@@ -60,15 +61,27 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
             if (it) {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
+            } else {
+                lifecycleScope.launch {
+                    repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        getAndSavePriorities()
+                    }
+                }
             }
         }
+    }
 
+    private suspend fun getAndSavePriorities() {
+        viewModel.getPriorities()
+        viewModel.receivedPriorities.collect {
+            viewModel.savePriorities(it)
+        }
     }
 
     override fun onClick(item: View) {
         when (item) {
             binding.textCreateAccountAction -> {
-                startActivity(Intent(applicationContext, MainActivity::class.java))
+                startActivity(Intent(applicationContext, SignUpActivity::class.java))
                 finish()
             }
 

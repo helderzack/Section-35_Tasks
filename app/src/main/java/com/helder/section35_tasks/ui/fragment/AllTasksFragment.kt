@@ -5,4 +5,8 @@ class AllTasksFragment : BaseFragment() {
     override fun setToolbarTitle() {
         activity?.title = "All Tasks"
     }
+
+    override fun getTasks() {
+        viewModel.getAllTasks()
+    }
 }

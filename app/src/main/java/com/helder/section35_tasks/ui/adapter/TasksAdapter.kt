@@ -8,8 +8,10 @@ import com.helder.section35_tasks.databinding.TaskItemBinding
 import com.helder.section35_tasks.ui.viewholder.TasksViewHolder
 
 class TasksAdapter: RecyclerView.Adapter<TasksViewHolder>() {
+
     private lateinit var binding: TaskItemBinding
     private var tasks: List<TaskModel> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         binding = TaskItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TasksViewHolder(binding)

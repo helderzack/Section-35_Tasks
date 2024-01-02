@@ -16,7 +16,7 @@
         tools:layout="@layout/tasks_fragments_layout" />
     <fragment
         android:id="@+id/expired_tasks_fragment"
-        android:name="com.helder.section35_tasks.ui.fragment.ExpiredTasksFragment"
+        android:name="com.helder.section35_tasks.ui.fragment.OverdueTasksFragment"
         android:label="Expired Tasks Fragment"
         tools:layout="@layout/tasks_fragments_layout" />
 </navigation>
