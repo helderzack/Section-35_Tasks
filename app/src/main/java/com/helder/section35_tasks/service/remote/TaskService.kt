@@ -22,33 +22,37 @@ interface TaskService {
     fun getOverdueTasks(): Call<List<TaskModel>>
 
     @GET("Task/{id}")
-    fun getTask(@Path("id") id: Int): Call<TaskModel>
+    fun getTask(@Path(value = "Id", encoded = true) id: Int): Call<TaskModel>
 
     @POST("Task")
     @FormUrlEncoded
-    fun save(
-        @Field("priorityId") priorityId: Int,
-        @Field("description") description: String,
-        @Field("dueDate") dueDate: String,
-        @Field("complete") complete: Boolean
+    fun create(
+        @Field("PriorityId") priorityId: Int,
+        @Field("Description") description: String,
+        @Field("DueDate") dueDate: String,
+        @Field("Complete") complete: Boolean
     ): Call<Boolean>
 
     @PUT("Task")
+    @FormUrlEncoded
     fun update(
-        @Field("id") id: Int,
-        @Field("priorityId") priorityId: Int,
-        @Field("description") description: String,
-        @Field("dueDate") dueDate: String,
-        @Field("complete") complete: Boolean
+        @Field("Id") id: Int,
+        @Field("PriorityId") priorityId: Int,
+        @Field("Description") description: String,
+        @Field("DueDate") dueDate: String,
+        @Field("Complete") complete: Boolean
     ): Call<Boolean>
 
     @DELETE("Task")
-    fun remove(@Field("id") id: Int): Call<Boolean>
+    @FormUrlEncoded
+    fun remove(@Field("Id") id: Int): Call<Boolean>
 
     @PUT("Task/Complete")
-    fun markComplete(@Field("id") id: Int): Call<Boolean>
+    @FormUrlEncoded
+    fun markComplete(@Field("Id") id: Int): Call<Boolean>
 
     @PUT("Task/Undo")
-    fun markIncomplete(@Field("id") id: Int): Call<Boolean>
+    @FormUrlEncoded
+    fun markIncomplete(@Field("Id") id: Int): Call<Boolean>
 
 }

@@ -5,11 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.helder.section35_tasks.data.model.PriorityModel
-import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.service.constant.Constants
 
 @Database(
-    entities = [PriorityModel::class, TaskModel::class],
+    entities = [PriorityModel::class],
     version = Constants.Database.DATABASE_VERSION
 )
 abstract class TaskDatabase : RoomDatabase() {
@@ -32,8 +31,6 @@ abstract class TaskDatabase : RoomDatabase() {
             return INSTANCE
         }
     }
-
-    abstract fun taskDao(): TaskDAO
 
     abstract fun priorityDao(): PriorityDAO
 }

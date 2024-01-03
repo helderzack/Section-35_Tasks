@@ -54,7 +54,18 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
             override fun onFailure(message: String) {
                 Log.d("TASKS_FETCHING", message)
             }
+        })
+    }
 
+    fun createTask(task: TaskModel) {
+        taskRepository.createTask(task, object : APIListener<Boolean> {
+            override fun onSuccess(result: Boolean) {
+                Log.d("TASKS_FETCHING", result.toString())
+            }
+
+            override fun onFailure(message: String) {
+                Log.d("TASKS_FETCHING", message)
+            }
         })
     }
 
