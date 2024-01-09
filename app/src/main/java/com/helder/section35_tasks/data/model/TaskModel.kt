@@ -9,14 +9,14 @@ data class TaskModel(
     val id: Int,
 
     @SerializedName("PriorityId")
-    val priorityId: Int,
+    var priorityId: Int,
 
     @SerializedName("Description")
-    val description: String,
+    var description: String,
 
     @SerializedName("DueDate")
-    val dueDate: LocalDate,
+    var dueDate: LocalDate,
 
     @SerializedName("Complete")
-    val complete: Boolean
+    var complete: Boolean
 )

@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDate
 
 class RetrofitClient private constructor() {
+
     companion object {
         private lateinit var INSTANCE: Retrofit
         private var token = ""
@@ -59,4 +60,5 @@ class RetrofitClient private constructor() {
             this.personKey = ""
         }
     }
+
 }

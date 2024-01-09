@@ -13,7 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.data.model.PriorityModel
+import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
+import com.helder.section35_tasks.service.listener.OnRadioButtonChanged
 import com.helder.section35_tasks.ui.activity.AddTaskActivity
 import com.helder.section35_tasks.ui.adapter.TasksAdapter
 import com.helder.section35_tasks.ui.viewmodel.BaseViewModel
@@ -38,7 +40,15 @@ abstract class BaseFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[BaseViewModel::class.java]
 
-        val adapter = TasksAdapter()
+        val adapter = TasksAdapter(object : OnRadioButtonChanged {
+            override fun onRadioButtonChanged(task: TaskModel) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.updateTask(task)
+                    getTasks()
+                }
+            }
+
+        })
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

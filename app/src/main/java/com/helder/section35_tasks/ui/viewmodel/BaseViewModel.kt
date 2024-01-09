@@ -84,6 +84,21 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
+    fun updateTask(task: TaskModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.updateTask(task, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    Log.d("TASKS_FETCHING", result.toString())
+                }
+
+                override fun onFailure(message: String) {
+                    Log.d("TASKS_FETCHING", message)
+                }
+
+            })
+        }
+    }
+
     fun getPriorities() {
         viewModelScope.launch(Dispatchers.IO) {
             priorityRepository.getPriorities(object : APIListener<List<PriorityModel>> {
