@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="24/10/2023" />
+        tools:text="1" />
 
     <View
         android:id="@+id/view_line_separator"

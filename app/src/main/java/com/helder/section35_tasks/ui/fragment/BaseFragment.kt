@@ -12,45 +12,54 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
 import com.helder.section35_tasks.ui.activity.AddTaskActivity
 import com.helder.section35_tasks.ui.adapter.TasksAdapter
-import com.helder.section35_tasks.ui.viewmodel.TasksViewModel
+import com.helder.section35_tasks.ui.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment : Fragment() {
 
     private var _binding: TasksFragmentsLayoutBinding? = null
     private val binding get() = _binding!!
-    protected lateinit var viewModel: TasksViewModel
+    protected lateinit var viewModel: BaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("WHAT_THE_FUCK", "Fragment, nigga")
         _binding = TasksFragmentsLayoutBinding.inflate(inflater, container, false)
 
         binding.floatingButtonAddTask.setOnClickListener {
             startActivity(Intent(requireContext(), AddTaskActivity::class.java))
         }
 
-        viewModel = ViewModelProvider(this)[TasksViewModel::class.java]
+        viewModel = ViewModelProvider(this)[BaseViewModel::class.java]
 
-        val adapter  = TasksAdapter()
+        val adapter = TasksAdapter()
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                getTasks()
-                viewModel.tasks.collect {
-                    adapter.setData(it)
+                var priorities: List<PriorityModel> = mutableListOf()
+                launch {
+                    viewModel.getPriorities()
+                    viewModel.receivedPriorities.collect {
+                        priorities = it
+                    }
+                }
+                launch {
+                    getTasks()
+                    viewModel.tasks.collect {
+                        Log.d("TASKS_FETCHING", "Calling View Model")
+                        adapter.setData(it, priorities)
+                        binding.recyclerViewTasks.layoutManager = LinearLayoutManager(requireContext())
+                        binding.recyclerViewTasks.adapter = adapter
+                    }
                 }
             }
         }
-
-        binding.recyclerViewTasks.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewTasks.adapter = adapter
 
         setToolbarTitle()
 

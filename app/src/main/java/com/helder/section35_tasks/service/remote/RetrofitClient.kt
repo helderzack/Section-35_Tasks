@@ -1,9 +1,12 @@
 package com.helder.section35_tasks.service.remote
 
+import com.google.gson.GsonBuilder
+import com.helder.section35_tasks.service.adapter.LocalDateAdapter
 import com.helder.section35_tasks.service.constant.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
 
 class RetrofitClient private constructor() {
     companion object {
@@ -28,7 +31,13 @@ class RetrofitClient private constructor() {
                     INSTANCE = Retrofit.Builder()
                         .baseUrl("http://devmasterteam.com/CursoAndroidAPI/")
                         .client(httpClient.build())
-                        .addConverterFactory(GsonConverterFactory.create())
+                        .addConverterFactory(
+                            GsonConverterFactory.create(
+                                GsonBuilder()
+                                    .registerTypeAdapter(LocalDate::class.java, LocalDateAdapter())
+                                    .create()
+                            )
+                        )
                         .build()
                 }
             }

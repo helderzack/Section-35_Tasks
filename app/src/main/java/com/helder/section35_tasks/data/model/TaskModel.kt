@@ -1,6 +1,7 @@
 package com.helder.section35_tasks.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.time.LocalDate
 
 data class TaskModel(
 
@@ -14,7 +15,7 @@ data class TaskModel(
     val description: String,
 
     @SerializedName("DueDate")
-    val dueDate: String,
+    val dueDate: LocalDate,
 
     @SerializedName("Complete")
     val complete: Boolean

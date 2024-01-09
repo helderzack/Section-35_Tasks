@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import java.time.LocalDate
 
 interface TaskService {
 
@@ -29,7 +30,7 @@ interface TaskService {
     fun create(
         @Field("PriorityId") priorityId: Int,
         @Field("Description") description: String,
-        @Field("DueDate") dueDate: String,
+        @Field("DueDate") dueDate: LocalDate,
         @Field("Complete") complete: Boolean
     ): Call<Boolean>
 
@@ -39,7 +40,7 @@ interface TaskService {
         @Field("Id") id: Int,
         @Field("PriorityId") priorityId: Int,
         @Field("Description") description: String,
-        @Field("DueDate") dueDate: String,
+        @Field("DueDate") dueDate: LocalDate,
         @Field("Complete") complete: Boolean
     ): Call<Boolean>
 

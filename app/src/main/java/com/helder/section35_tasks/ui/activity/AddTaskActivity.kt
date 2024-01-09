@@ -1,25 +1,32 @@
 package com.helder.section35_tasks.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.helder.section35_tasks.data.model.PriorityModel
+import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.ActivityAddTaskBinding
+import com.helder.section35_tasks.service.listener.DateListener
 import com.helder.section35_tasks.ui.fragment.DatePickerFragment
 import com.helder.section35_tasks.ui.viewmodel.AddTaskViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
-class AddTaskActivity : AppCompatActivity(), OnClickListener, AdapterView.OnItemSelectedListener {
+class AddTaskActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityAddTaskBinding
     private lateinit var viewModel: AddTaskViewModel
+
+    private var dueDate = LocalDate.now()
+    private lateinit var priorities: List<PriorityModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +39,18 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener, AdapterView.OnItem
 
         binding.textDatePickerSelector.setOnClickListener(this)
         binding.buttonAddTask.setOnClickListener(this)
-        binding.spinnerTaskPriority.onItemSelectedListener = this
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getPriorities()
 
                 viewModel.priorities.collect {
-                    val priorities = it.map { priority -> priority.description }
+                    priorities = it
+
                     ArrayAdapter(
                         applicationContext,
                         android.R.layout.simple_spinner_item,
-                        priorities
+                        priorities.map { priority -> priority.description }
                     )
                         .also { adapter ->
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -53,6 +60,8 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener, AdapterView.OnItem
 
             }
         }
+
+        observe()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -68,26 +77,48 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener, AdapterView.OnItem
             }
 
             binding.buttonAddTask -> {
-
+                createTask()
             }
         }
     }
 
     private fun openDatePicker() {
-        Log.d("APP_BEHAVIOR", "DATE_PICKER_CLICKED")
-        val datePickerFragment = DatePickerFragment()
+        val datePickerFragment = DatePickerFragment(object : DateListener {
+            override fun onDateSet(selectedDate: LocalDate) {
+                dueDate = selectedDate
+                Log.d("DATE_PICKER", "Picked date: $dueDate")
+            }
+
+        })
         datePickerFragment.show(supportFragmentManager, "datePicker")
     }
 
-    override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-        val taskPriority = parent.getItemAtPosition(position).toString()
-    }
+    private fun createTask() {
+        val taskPriority = binding.spinnerTaskPriority.selectedItem.toString()
+        val priorityId = priorities.first { priority -> priority.description == taskPriority }.id
+        val isComplete = binding.checkboxComplete.isChecked
+        val description = binding.editDescription.text.toString()
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
+        val task = TaskModel(
+            0,
+            priorityId,
+            description,
+            dueDate,
+            isComplete
+        )
+
+        Log.d("ADD_TASK", "$task")
+
+        viewModel.createTask(task)
     }
 
     private fun observe() {
-
+        viewModel.taskAddedSuccessfully.observe(this) {
+            if (it) {
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+                finish()
+            }
+        }
     }
+
 }

@@ -36,25 +36,9 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
         viewModel.verifyLoggedUser()
 
         observe()
-
     }
 
     private fun observe() {
-        viewModel.login.observe(
-            this
-        ) {
-            if (it.status()) {
-                startActivity(Intent(applicationContext, MainActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    it.message(),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
         viewModel.loggedUser.observe(
             this
         ) {
@@ -69,10 +53,26 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
                 }
             }
         }
+
+        viewModel.login.observe(
+            this
+        ) {
+            if (it.status()) {
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    it.message(),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private suspend fun getAndSavePriorities() {
         viewModel.getPriorities()
+
         viewModel.receivedPriorities.collect {
             viewModel.savePriorities(it)
         }
