@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.data.model.PriorityModel
-import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
-import com.helder.section35_tasks.service.listener.OnRadioButtonChanged
+import com.helder.section35_tasks.service.listener.OnImageViewClicked
 import com.helder.section35_tasks.ui.activity.AddTaskActivity
 import com.helder.section35_tasks.ui.adapter.TasksAdapter
 import com.helder.section35_tasks.ui.viewmodel.BaseViewModel
@@ -26,6 +26,7 @@ abstract class BaseFragment : Fragment() {
     private var _binding: TasksFragmentsLayoutBinding? = null
     private val binding get() = _binding!!
     protected lateinit var viewModel: BaseViewModel
+    protected lateinit var adapter: TasksAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,31 +41,36 @@ abstract class BaseFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[BaseViewModel::class.java]
 
-        val adapter = TasksAdapter(object : OnRadioButtonChanged {
-            override fun onRadioButtonChanged(task: TaskModel) {
+        adapter = TasksAdapter(object : OnImageViewClicked {
+            override fun onTaskMarkedComplete(id: Int) {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.updateTask(task)
-                    getTasks()
+                    viewModel.markComplete(id)
                 }
             }
 
+            override fun onTaskMarkedIncomplete(id: Int) {
+                viewModel.markIncomplete(id)
+            }
         })
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 var priorities: List<PriorityModel> = mutableListOf()
+
                 launch {
                     viewModel.getPriorities()
                     viewModel.receivedPriorities.collect {
                         priorities = it
                     }
                 }
+
                 launch {
                     getTasks()
                     viewModel.tasks.collect {
                         Log.d("TASKS_FETCHING", "Calling View Model")
                         adapter.setData(it, priorities)
-                        binding.recyclerViewTasks.layoutManager = LinearLayoutManager(requireContext())
+                        binding.recyclerViewTasks.layoutManager =
+                            LinearLayoutManager(requireContext())
                         binding.recyclerViewTasks.adapter = adapter
                     }
                 }
@@ -73,12 +79,33 @@ abstract class BaseFragment : Fragment() {
 
         setToolbarTitle()
 
+        observe()
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observe() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.tasks.collect {
+                    adapter.updateTasks(it)
+                }
+            }
+        }
+
+        viewModel.wasTaskUpdated.observe(viewLifecycleOwner) {
+            if (it.status()) {
+                Toast.makeText(requireContext(), "Task updated!", Toast.LENGTH_SHORT).show()
+                getTasks()
+            } else {
+                Toast.makeText(requireContext(), it.message(), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     abstract fun setToolbarTitle()

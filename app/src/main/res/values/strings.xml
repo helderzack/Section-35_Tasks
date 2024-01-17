@@ -20,4 +20,5 @@
     <string name="invalid_email_address_alert">Please enter a valid email address!</string>
     <string name="invalid_password_alert">Please enter a valid password!</string>
     <string name="app_shared_preferences">App Shared Preferences</string>
+    <string name="task_completeness">Task Completeness</string>
 </resources>

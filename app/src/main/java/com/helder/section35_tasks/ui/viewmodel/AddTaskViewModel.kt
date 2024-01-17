@@ -1,13 +1,13 @@
 package com.helder.section35_tasks.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.data.model.TaskModel
+import com.helder.section35_tasks.data.model.ValidationModel
 import com.helder.section35_tasks.service.listener.APIListener
 import com.helder.section35_tasks.service.repository.PriorityRepository
 import com.helder.section35_tasks.service.repository.TaskRepository
@@ -24,8 +24,8 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     private val _priorities = MutableStateFlow<List<PriorityModel>>(mutableListOf())
     val priorities = _priorities.asStateFlow()
 
-    private val _taskAddedSuccessfully = MutableLiveData<Boolean>(false)
-    val taskAddedSuccessfully: LiveData<Boolean> = _taskAddedSuccessfully
+    private val _taskAddedSuccessfully = MutableLiveData<ValidationModel>()
+    val taskAddedSuccessfully: LiveData<ValidationModel> = _taskAddedSuccessfully
 
     fun getPriorities() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -44,13 +44,13 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     fun createTask(task: TaskModel) {
         taskRepository.createTask(task, object : APIListener<Boolean> {
             override fun onSuccess(result: Boolean) {
-                Log.d("CREATE_TASK", "Was Task created? $result")
-                _taskAddedSuccessfully.value = result
+                _taskAddedSuccessfully.value = ValidationModel()
             }
 
             override fun onFailure(message: String) {
-                _taskAddedSuccessfully.value = false
+                _taskAddedSuccessfully.value = ValidationModel(message)
             }
         })
     }
+
 }

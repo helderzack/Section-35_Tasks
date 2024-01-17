@@ -68,12 +68,10 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             priorityRepository.getPriorities(object : APIListener<List<PriorityModel>> {
                 override fun onSuccess(result: List<PriorityModel>) {
-                    Log.d("PRIORITIES", result.toString())
                     _receivedPriorities.value = result
                 }
 
                 override fun onFailure(message: String) {
-                    Log.d("PRIORITIES", message)
                 }
             })
         }

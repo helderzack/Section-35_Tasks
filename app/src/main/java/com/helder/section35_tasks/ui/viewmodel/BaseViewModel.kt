@@ -3,9 +3,12 @@ package com.helder.section35_tasks.ui.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.data.model.TaskModel
+import com.helder.section35_tasks.data.model.ValidationModel
 import com.helder.section35_tasks.service.listener.APIListener
 import com.helder.section35_tasks.service.repository.PriorityRepository
 import com.helder.section35_tasks.service.repository.TaskRepository
@@ -25,6 +28,9 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _receivedPriorities = MutableStateFlow<List<PriorityModel>>(mutableListOf())
     val receivedPriorities: StateFlow<List<PriorityModel>> = _receivedPriorities.asStateFlow()
+
+    private val _wasTaskUpdated = MutableLiveData<ValidationModel>()
+    val wasTaskUpdated: LiveData<ValidationModel> = _wasTaskUpdated
 
     fun getAllTasks() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -88,13 +94,46 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.updateTask(task, object : APIListener<Boolean> {
                 override fun onSuccess(result: Boolean) {
-                    Log.d("TASKS_FETCHING", result.toString())
+                    Log.d("UPDATE_TASK", "Was task updated? $result")
+                    _wasTaskUpdated.value = ValidationModel()
                 }
 
                 override fun onFailure(message: String) {
-                    Log.d("TASKS_FETCHING", message)
+                    Log.d("UPDATE_TASK", "Task was not updated")
+                    _wasTaskUpdated.value = ValidationModel(message)
+                }
+            })
+        }
+    }
+
+    fun markComplete(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.markComplete(id, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    Log.d("UPDATE_TASK", "Was task updated? $result")
+                    _wasTaskUpdated.value = ValidationModel()
                 }
 
+                override fun onFailure(message: String) {
+                    Log.d("UPDATE_TASK", "Task was not updated")
+                    _wasTaskUpdated.value = ValidationModel(message)
+                }
+            })
+        }
+    }
+
+    fun markIncomplete(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.markIncomplete(id, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    Log.d("UPDATE_TASK", "Was task updated? $result")
+                    _wasTaskUpdated.value = ValidationModel()
+                }
+
+                override fun onFailure(message: String) {
+                    Log.d("UPDATE_TASK", "Task was not updated")
+                    _wasTaskUpdated.value = ValidationModel(message)
+                }
             })
         }
     }

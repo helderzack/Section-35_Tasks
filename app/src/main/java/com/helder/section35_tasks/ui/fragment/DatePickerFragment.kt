@@ -21,6 +21,7 @@ class DatePickerFragment(private val listener: DateListener): DialogFragment(), 
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         val date = LocalDate.of(year, month + 1, day)
+        Calendar.getInstance().set(year, month + 1, day)
         listener.onDateSet(date)
     }
 

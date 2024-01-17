@@ -1,8 +1,6 @@
 package com.helder.section35_tasks.service.repository
 
-import android.util.Log
 import com.helder.section35_tasks.data.model.TaskModel
-import com.helder.section35_tasks.service.constant.Constants
 import com.helder.section35_tasks.service.listener.APIListener
 import com.helder.section35_tasks.service.remote.RetrofitClient
 import com.helder.section35_tasks.service.remote.TaskService
@@ -20,13 +18,7 @@ class TaskRepository : BaseRepository() {
                 call: Call<List<TaskModel>>,
                 response: Response<List<TaskModel>>
             ) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    Log.d("TASKS_FETCHING", errorBody)
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<List<TaskModel>>, t: Throwable) {
@@ -41,13 +33,7 @@ class TaskRepository : BaseRepository() {
                 call: Call<List<TaskModel>>,
                 response: Response<List<TaskModel>>
             ) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    Log.d("TASKS_FETCHING", errorBody)
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<List<TaskModel>>, t: Throwable) {
@@ -62,13 +48,7 @@ class TaskRepository : BaseRepository() {
                 call: Call<List<TaskModel>>,
                 response: Response<List<TaskModel>>
             ) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    Log.d("TASKS_FETCHING", errorBody)
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<List<TaskModel>>, t: Throwable) {
@@ -80,12 +60,7 @@ class TaskRepository : BaseRepository() {
     fun getTask(id: Int, listener: APIListener<TaskModel>) {
         taskService.getTask(id).enqueue(object : Callback<TaskModel> {
             override fun onResponse(call: Call<TaskModel>, response: Response<TaskModel>) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<TaskModel>, t: Throwable) {
@@ -102,12 +77,7 @@ class TaskRepository : BaseRepository() {
             task.complete
         ).enqueue(object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
@@ -125,12 +95,7 @@ class TaskRepository : BaseRepository() {
             task.complete
         ).enqueue(object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
@@ -142,12 +107,7 @@ class TaskRepository : BaseRepository() {
     fun deleteTask(id: Int, listener: APIListener<Boolean>) {
         taskService.remove(id).enqueue(object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
@@ -159,12 +119,7 @@ class TaskRepository : BaseRepository() {
     fun markComplete(id: Int, listener: APIListener<Boolean>) {
         taskService.markComplete(id).enqueue(object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {
@@ -176,12 +131,7 @@ class TaskRepository : BaseRepository() {
     fun markIncomplete(id: Int, listener: APIListener<Boolean>) {
         taskService.markIncomplete(id).enqueue(object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                if (response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<Boolean>, t: Throwable) {

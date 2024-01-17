@@ -2,7 +2,6 @@ package com.helder.section35_tasks.service.repository
 
 import android.content.Context
 import com.helder.section35_tasks.data.model.PriorityModel
-import com.helder.section35_tasks.service.constant.Constants
 import com.helder.section35_tasks.service.listener.APIListener
 import com.helder.section35_tasks.service.local.TaskDatabase
 import com.helder.section35_tasks.service.remote.PriorityService
@@ -22,12 +21,7 @@ class PriorityRepository(val context: Context): BaseRepository() {
                 call: Call<List<PriorityModel>>,
                 response: Response<List<PriorityModel>>
             ) {
-                if(response.code() == Constants.HTTPStatusCode.OK) {
-                    response.body()?.let { listener.onSuccess(it) }
-                } else {
-                    val errorBody = failResponse(response.errorBody()!!.string())
-                    listener.onFailure(errorBody)
-                }
+                handleResponse(response, listener)
             }
 
             override fun onFailure(call: Call<List<PriorityModel>>, t: Throwable) {

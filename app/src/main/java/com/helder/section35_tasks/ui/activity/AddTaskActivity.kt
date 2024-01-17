@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +40,8 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
 
         binding.textDatePickerSelector.setOnClickListener(this)
         binding.buttonAddTask.setOnClickListener(this)
+
+        observe()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -95,7 +98,8 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
 
     private fun createTask() {
         val taskPriority = binding.spinnerTaskPriority.selectedItem.toString()
-        val priorityId = priorities.first { priority -> priority.description == taskPriority }.id
+//        val priorityId = priorities.first { priority -> priority.description == taskPriority }.id
+        val priorityId = priorities[binding.spinnerTaskPriority.selectedItemPosition].id
         val isComplete = binding.checkboxComplete.isChecked
         val description = binding.editDescription.text.toString()
 
@@ -114,9 +118,12 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
 
     private fun observe() {
         viewModel.taskAddedSuccessfully.observe(this) {
-            if (it) {
+            if (it.status()) {
+                Toast.makeText(applicationContext, "Task added successfully!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
+            } else {
+                Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
             }
         }
     }

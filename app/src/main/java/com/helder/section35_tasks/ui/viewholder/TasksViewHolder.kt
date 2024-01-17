@@ -1,32 +1,36 @@
 package com.helder.section35_tasks.ui.viewholder
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
+import com.helder.section35_tasks.R
 import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TaskItemBinding
-import com.helder.section35_tasks.service.listener.OnRadioButtonChanged
+import com.helder.section35_tasks.service.listener.OnImageViewClicked
 
-class TasksViewHolder(
-    private val binding: TaskItemBinding,
-    private val listener: OnRadioButtonChanged
-) : RecyclerView.ViewHolder(binding.root) {
+class TasksViewHolder(private val binding: TaskItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(task: TaskModel, priority: String) {
-        Log.d("TASKS_FETCHING", task.toString())
+    fun bind(task: TaskModel, priority: String, listener: OnImageViewClicked) {
         binding.textTaskDescription.text = task.description
         binding.textTaskPriority.text = priority
         binding.textTaskLimitDate.text = task.dueDate.toString()
 
-        binding.radioCompletedTask.setOnCheckedChangeListener { buttonView, isChecked ->
-//            if(isChecked) {
-//                buttonView.setButtonIcon()
-//            }
-            task.complete = isChecked
-            listener.onRadioButtonChanged(task)
+        if(task.complete) {
+            binding.imageViewCompletedTask.setImageResource(R.drawable.ic_checked)
+        } else {
+            binding.imageViewCompletedTask.setImageResource(R.drawable.ic_unchecked)
         }
 
-        if (task.complete) {
-            binding.radioCompletedTask.isChecked = true
+        binding.imageViewCompletedTask.setOnClickListener {
+            if(task.complete) {
+                task.complete = false
+                listener.onTaskMarkedIncomplete(task.id)
+                binding.imageViewCompletedTask.setImageResource(R.drawable.ic_unchecked)
+            } else {
+                task.complete = true
+                listener.onTaskMarkedComplete(task.id)
+                binding.imageViewCompletedTask.setImageResource(R.drawable.ic_checked)
+            }
+
         }
     }
 

@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TaskItemBinding
-import com.helder.section35_tasks.service.listener.OnRadioButtonChanged
+import com.helder.section35_tasks.service.listener.OnImageViewClicked
 import com.helder.section35_tasks.ui.viewholder.TasksViewHolder
 
-class TasksAdapter(private val listener: OnRadioButtonChanged) :
+class TasksAdapter(private val listener: OnImageViewClicked) :
     RecyclerView.Adapter<TasksViewHolder>() {
 
     private lateinit var binding: TaskItemBinding
@@ -18,7 +18,7 @@ class TasksAdapter(private val listener: OnRadioButtonChanged) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         binding = TaskItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TasksViewHolder(binding, listener)
+        return TasksViewHolder(binding)
     }
 
     override fun getItemCount(): Int = tasks.size
@@ -26,13 +26,18 @@ class TasksAdapter(private val listener: OnRadioButtonChanged) :
     override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
         holder.bind(
             tasks[position],
-            priorities.first { priority -> priority.id == tasks[position].priorityId }.description
+            priorities.first { priority -> priority.id == tasks[position].priorityId }.description,
+            listener
         )
     }
 
     fun setData(tasks: List<TaskModel>, priorities: List<PriorityModel>) {
         this.tasks = tasks
         this.priorities = priorities
+    }
+
+    fun updateTasks(tasks: List<TaskModel>) {
+        this.tasks = tasks
     }
 
 }
