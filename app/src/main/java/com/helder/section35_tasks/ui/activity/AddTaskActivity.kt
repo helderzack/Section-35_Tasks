@@ -86,19 +86,19 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun openDatePicker() {
-        val datePickerFragment = DatePickerFragment(object : DateListener {
+        val datePickerFragment = DatePickerFragment(dueDate, object : DateListener {
             override fun onDateSet(selectedDate: LocalDate) {
                 dueDate = selectedDate
-                Log.d("DATE_PICKER", "Picked date: $dueDate")
+                val formattedDate = "${dueDate.dayOfMonth} ${dueDate.month} ${dueDate.year}"
+                binding.textDatePickerSelector.text = formattedDate
             }
 
         })
+        
         datePickerFragment.show(supportFragmentManager, "datePicker")
     }
 
     private fun createTask() {
-        val taskPriority = binding.spinnerTaskPriority.selectedItem.toString()
-//        val priorityId = priorities.first { priority -> priority.description == taskPriority }.id
         val priorityId = priorities[binding.spinnerTaskPriority.selectedItemPosition].id
         val isComplete = binding.checkboxComplete.isChecked
         val description = binding.editDescription.text.toString()
