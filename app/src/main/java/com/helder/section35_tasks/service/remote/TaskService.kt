@@ -22,7 +22,7 @@ interface TaskService {
     @GET("Task/Overdue")
     fun getOverdueTasks(): Call<List<TaskModel>>
 
-    @GET("Task/{id}")
+    @GET("Task/{Id}")
     fun getTask(@Path(value = "Id", encoded = true) id: Int): Call<TaskModel>
 
     @POST("Task")

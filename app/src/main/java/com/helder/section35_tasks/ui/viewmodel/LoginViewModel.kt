@@ -65,7 +65,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getPriorities() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             priorityRepository.getPriorities(object : APIListener<List<PriorityModel>> {
                 override fun onSuccess(result: List<PriorityModel>) {
                     _receivedPriorities.value = result

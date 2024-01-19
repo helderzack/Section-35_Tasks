@@ -1,5 +1,7 @@
 package com.helder.section35_tasks.ui.viewholder
 
+import android.view.View
+import android.view.View.OnClickListener
 import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.R
 import com.helder.section35_tasks.data.model.TaskModel
@@ -30,7 +32,10 @@ class TasksViewHolder(private val binding: TaskItemBinding) :
                 listener.onTaskMarkedComplete(task.id)
                 binding.imageViewCompletedTask.setImageResource(R.drawable.ic_checked)
             }
+        }
 
+        binding.cardViewTask.setOnClickListener {
+            listener.onTaskCardClicked(task.id)
         }
     }
 

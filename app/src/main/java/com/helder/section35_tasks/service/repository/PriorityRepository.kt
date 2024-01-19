@@ -10,13 +10,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PriorityRepository(val context: Context): BaseRepository() {
+class PriorityRepository(val context: Context) : BaseRepository() {
 
     private val priorityService = RetrofitClient.getService(PriorityService::class.java)
     private val database = TaskDatabase.getDatabase(context).priorityDao()
 
-    fun getPriorities(listener: APIListener<List<PriorityModel>>) {
-        priorityService.getPriorities().enqueue(object: Callback<List<PriorityModel>> {
+    suspend fun getPriorities(listener: APIListener<List<PriorityModel>>) {
+        priorityService.getPriorities().enqueue(object : Callback<List<PriorityModel>> {
             override fun onResponse(
                 call: Call<List<PriorityModel>>,
                 response: Response<List<PriorityModel>>
@@ -28,6 +28,7 @@ class PriorityRepository(val context: Context): BaseRepository() {
                 listener.onFailure("Error: ${t.message}")
             }
         })
+
     }
 
     fun savePriorities(priorities: List<PriorityModel>) {

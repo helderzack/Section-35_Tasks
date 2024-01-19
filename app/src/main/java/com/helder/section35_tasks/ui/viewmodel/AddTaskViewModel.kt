@@ -24,8 +24,28 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     private val _priorities = MutableStateFlow<List<PriorityModel>>(mutableListOf())
     val priorities = _priorities.asStateFlow()
 
+    private var _task = MutableLiveData<TaskModel>()
+    var task: LiveData<TaskModel> = _task
+
     private val _taskAddedSuccessfully = MutableLiveData<ValidationModel>()
     val taskAddedSuccessfully: LiveData<ValidationModel> = _taskAddedSuccessfully
+
+    private val _wasTaskUpdated = MutableLiveData<ValidationModel>()
+    val wasTaskUpdated: LiveData<ValidationModel> = _wasTaskUpdated
+
+    fun getTask(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.getTask(id, object : APIListener<TaskModel> {
+                override fun onSuccess(result: TaskModel) {
+                    _task.value = result
+                }
+
+                override fun onFailure(message: String) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
+    }
 
     fun getPriorities() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -42,15 +62,31 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun createTask(task: TaskModel) {
-        taskRepository.createTask(task, object : APIListener<Boolean> {
-            override fun onSuccess(result: Boolean) {
-                _taskAddedSuccessfully.value = ValidationModel()
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.createTask(task, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    _taskAddedSuccessfully.value = ValidationModel()
+                }
 
-            override fun onFailure(message: String) {
-                _taskAddedSuccessfully.value = ValidationModel(message)
-            }
-        })
+                override fun onFailure(message: String) {
+                    _taskAddedSuccessfully.value = ValidationModel(message)
+                }
+            })
+        }
+    }
+
+    fun updateTask(task: TaskModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.updateTask(task, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    _wasTaskUpdated.value = ValidationModel()
+                }
+
+                override fun onFailure(message: String) {
+                    _wasTaskUpdated.value = ValidationModel(message)
+                }
+            })
+        }
     }
 
 }

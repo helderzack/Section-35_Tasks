@@ -26,7 +26,7 @@ abstract class BaseFragment : Fragment() {
     private var _binding: TasksFragmentsLayoutBinding? = null
     private val binding get() = _binding!!
     protected lateinit var viewModel: BaseViewModel
-    protected lateinit var adapter: TasksAdapter
+    private lateinit var adapter: TasksAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +50,12 @@ abstract class BaseFragment : Fragment() {
 
             override fun onTaskMarkedIncomplete(id: Int) {
                 viewModel.markIncomplete(id)
+            }
+
+            override fun onTaskCardClicked(id: Int) {
+                val intent = Intent(requireActivity(), AddTaskActivity::class.java)
+                intent.putExtra("taskId", id)
+                requireActivity().startActivity(intent)
             }
         })
 

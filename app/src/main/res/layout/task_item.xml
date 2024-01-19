@@ -5,62 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/image_view_completed_task"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_task"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_default"
-        android:clickable="true"
-        android:contentDescription="@string/task_completeness"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_unchecked" />
-
-    <TextView
-        android:id="@+id/text_task_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_default"
-        android:layout_marginTop="@dimen/margin_default"
-        android:textSize="@dimen/text_size_double"
-        app:layout_constraintStart_toEndOf="@id/image_view_completed_task"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Programming" />
-
-    <TextView
-        android:id="@+id/text_task_priority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_default"
-        android:layout_marginTop="@dimen/margin_half"
-        android:textSize="@dimen/text_size_double"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/image_view_completed_task"
-        app:layout_constraintTop_toBottomOf="@id/text_task_description"
-        tools:text="Low" />
-
-    <TextView
-        android:id="@+id/text_task_limit_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_default"
-        android:textSize="@dimen/text_size_double"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1" />
-
-    <View
-        android:id="@+id/view_line_separator"
-        android:layout_width="@dimen/full_constraint_width"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="@dimen/margin_half"
-        android:layout_marginTop="@dimen/margin_half"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_task_priority" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_view_completed_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_default"
+                android:clickable="true"
+                android:contentDescription="@string/task_completeness"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_unchecked" />
+
+            <TextView
+                android:id="@+id/text_task_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_default"
+                android:textSize="@dimen/text_size_double"
+                app:layout_constraintStart_toEndOf="@id/image_view_completed_task"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Programming" />
+
+            <TextView
+                android:id="@+id/text_task_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_half"
+                android:textSize="@dimen/text_size_double"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/image_view_completed_task"
+                app:layout_constraintTop_toBottomOf="@id/text_task_description"
+                tools:text="Low" />
+
+            <TextView
+                android:id="@+id/text_task_limit_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:textSize="@dimen/text_size_double"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1" />
+
+            <View
+                android:id="@+id/view_line_separator"
+                android:layout_width="@dimen/full_constraint_width"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin_half"
+                android:layout_marginTop="@dimen/margin_half"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_task_priority" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

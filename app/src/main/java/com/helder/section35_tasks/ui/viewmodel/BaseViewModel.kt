@@ -90,22 +90,6 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun updateTask(task: TaskModel) {
-        viewModelScope.launch(Dispatchers.IO) {
-            taskRepository.updateTask(task, object : APIListener<Boolean> {
-                override fun onSuccess(result: Boolean) {
-                    Log.d("UPDATE_TASK", "Was task updated? $result")
-                    _wasTaskUpdated.value = ValidationModel()
-                }
-
-                override fun onFailure(message: String) {
-                    Log.d("UPDATE_TASK", "Task was not updated")
-                    _wasTaskUpdated.value = ValidationModel(message)
-                }
-            })
-        }
-    }
-
     fun markComplete(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.markComplete(id, object : APIListener<Boolean> {

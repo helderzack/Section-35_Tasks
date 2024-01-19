@@ -2,7 +2,6 @@ package com.helder.section35_tasks.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.ArrayAdapter
@@ -41,11 +40,15 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
         binding.textDatePickerSelector.setOnClickListener(this)
         binding.buttonAddTask.setOnClickListener(this)
 
-        observe()
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getPriorities()
+
+                val taskId = intent.extras?.getInt("taskId")
+
+                if (taskId != null) {
+                    viewModel.getTask(taskId)
+                }
 
                 viewModel.priorities.collect {
                     priorities = it
@@ -60,7 +63,6 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
                             binding.spinnerTaskPriority.adapter = adapter
                         }
                 }
-
             }
         }
 
@@ -80,7 +82,7 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
             }
 
             binding.buttonAddTask -> {
-                createTask()
+                saveTask()
             }
         }
     }
@@ -94,37 +96,69 @@ class AddTaskActivity : AppCompatActivity(), OnClickListener {
             }
 
         })
-        
+
         datePickerFragment.show(supportFragmentManager, "datePicker")
     }
 
-    private fun createTask() {
+    private fun autofillForm(task: TaskModel) {
+        val priorityPosition = priorities.first { priority -> priority.id == task.priorityId }.id
+
+        binding.editDescription.setText(task.description)
+        binding.spinnerTaskPriority.setSelection(priorityPosition - 1)
+        binding.checkboxComplete.isChecked = task.complete
+
+        dueDate = task.dueDate
+        val formattedDate = "${dueDate.dayOfMonth} ${dueDate.month} ${dueDate.year}"
+        binding.textDatePickerSelector.text = formattedDate
+    }
+
+    private fun saveTask() {
         val priorityId = priorities[binding.spinnerTaskPriority.selectedItemPosition].id
         val isComplete = binding.checkboxComplete.isChecked
         val description = binding.editDescription.text.toString()
 
+        val taskId = intent.extras?.getInt("taskId") ?: 0
+
         val task = TaskModel(
-            0,
+            taskId,
             priorityId,
             description,
             dueDate,
             isComplete
         )
 
-        Log.d("ADD_TASK", "$task")
-
-        viewModel.createTask(task)
+        if(taskId != 0) {
+            viewModel.updateTask(task)
+        } else {
+            viewModel.createTask(task)
+        }
     }
 
     private fun observe() {
         viewModel.taskAddedSuccessfully.observe(this) {
             if (it.status()) {
-                Toast.makeText(applicationContext, "Task added successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Task added successfully!", Toast.LENGTH_SHORT)
+                    .show()
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
             }
+        }
+
+        viewModel.wasTaskUpdated.observe(this) {
+            if (it.status()) {
+                Toast.makeText(applicationContext, "Task updated successfully!", Toast.LENGTH_SHORT)
+                    .show()
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.task.observe(this) {
+            autofillForm(it)
         }
     }
 
