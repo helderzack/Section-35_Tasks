@@ -2,10 +2,10 @@ package com.helder.section35_tasks.service.remote
 
 import com.helder.section35_tasks.data.model.TaskModel
 import retrofit2.Call
-import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -25,6 +25,10 @@ interface TaskService {
     @GET("Task/{Id}")
     fun getTask(@Path(value = "Id", encoded = true) id: Int): Call<TaskModel>
 
+    @HTTP(method = "DELETE", path = "Task", hasBody = true)
+    @FormUrlEncoded
+    fun remove(@Field("Id") id: Int): Call<Boolean>
+
     @POST("Task")
     @FormUrlEncoded
     fun create(
@@ -43,10 +47,6 @@ interface TaskService {
         @Field("DueDate") dueDate: LocalDate,
         @Field("Complete") complete: Boolean
     ): Call<Boolean>
-
-    @DELETE("Task")
-    @FormUrlEncoded
-    fun remove(@Field("Id") id: Int): Call<Boolean>
 
     @PUT("Task/Complete")
     @FormUrlEncoded

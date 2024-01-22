@@ -32,6 +32,9 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
     private val _wasTaskUpdated = MutableLiveData<ValidationModel>()
     val wasTaskUpdated: LiveData<ValidationModel> = _wasTaskUpdated
 
+    private val _wasTaskDeleted = MutableLiveData<ValidationModel>()
+    val wasTaskDeleted: LiveData<ValidationModel> = _wasTaskDeleted
+
     fun getAllTasks() {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.getAllTasks(object : APIListener<List<TaskModel>> {
@@ -78,18 +81,6 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun createTask(task: TaskModel) {
-        taskRepository.createTask(task, object : APIListener<Boolean> {
-            override fun onSuccess(result: Boolean) {
-                Log.d("TASKS_FETCHING", result.toString())
-            }
-
-            override fun onFailure(message: String) {
-                Log.d("TASKS_FETCHING", message)
-            }
-        })
-    }
-
     fun markComplete(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.markComplete(id, object : APIListener<Boolean> {
@@ -126,12 +117,25 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             priorityRepository.getPriorities(object : APIListener<List<PriorityModel>> {
                 override fun onSuccess(result: List<PriorityModel>) {
-                    Log.d("PRIORITIES", result.toString())
                     _receivedPriorities.value = result
                 }
 
                 override fun onFailure(message: String) {
-                    Log.d("PRIORITIES", message)
+
+                }
+            })
+        }
+    }
+
+    fun deleteTask(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.deleteTask(id, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    _wasTaskDeleted.value = ValidationModel()
+                }
+
+                override fun onFailure(message: String) {
+                    _wasTaskDeleted.value = ValidationModel(message)
                 }
             })
         }

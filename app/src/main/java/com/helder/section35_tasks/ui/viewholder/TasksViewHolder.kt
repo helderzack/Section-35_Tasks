@@ -1,7 +1,5 @@
 package com.helder.section35_tasks.ui.viewholder
 
-import android.view.View
-import android.view.View.OnClickListener
 import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.R
 import com.helder.section35_tasks.data.model.TaskModel
@@ -20,6 +18,11 @@ class TasksViewHolder(private val binding: TaskItemBinding) :
             binding.imageViewCompletedTask.setImageResource(R.drawable.ic_checked)
         } else {
             binding.imageViewCompletedTask.setImageResource(R.drawable.ic_unchecked)
+        }
+
+        binding.cardViewTask.setOnLongClickListener {
+            listener.onLongClickToRemoval(task.id)
+            true
         }
 
         binding.imageViewCompletedTask.setOnClickListener {

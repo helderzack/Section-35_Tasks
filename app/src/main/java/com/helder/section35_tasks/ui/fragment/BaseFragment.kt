@@ -15,7 +15,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
+import com.helder.section35_tasks.service.listener.OnDialogOptions
 import com.helder.section35_tasks.service.listener.OnImageViewClicked
+import com.helder.section35_tasks.service.listener.TaskListener
 import com.helder.section35_tasks.ui.activity.AddTaskActivity
 import com.helder.section35_tasks.ui.adapter.TasksAdapter
 import com.helder.section35_tasks.ui.viewmodel.BaseViewModel
@@ -43,9 +45,7 @@ abstract class BaseFragment : Fragment() {
 
         adapter = TasksAdapter(object : OnImageViewClicked {
             override fun onTaskMarkedComplete(id: Int) {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.markComplete(id)
-                }
+                viewModel.markComplete(id)
             }
 
             override fun onTaskMarkedIncomplete(id: Int) {
@@ -56,6 +56,15 @@ abstract class BaseFragment : Fragment() {
                 val intent = Intent(requireActivity(), AddTaskActivity::class.java)
                 intent.putExtra("taskId", id)
                 requireActivity().startActivity(intent)
+            }
+
+            override fun onLongClickToRemoval(id: Int) {
+                DeleteGameDialogFragment(object : OnDialogOptions {
+                    override fun onDeleteClick() {
+                        viewModel.deleteTask(id)
+                    }
+                })
+                    .show(requireActivity().supportFragmentManager, "DELETE_DIALOG")
             }
         })
 
@@ -112,6 +121,16 @@ abstract class BaseFragment : Fragment() {
                 Toast.makeText(requireContext(), it.message(), Toast.LENGTH_SHORT).show()
             }
         }
+
+        viewModel.wasTaskDeleted.observe(viewLifecycleOwner) {
+            if (it.status()) {
+                Toast.makeText(requireContext(), "Task deleted!", Toast.LENGTH_SHORT).show()
+                getTasks()
+            } else {
+                Toast.makeText(requireContext(), it.message(), Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     abstract fun setToolbarTitle()
