@@ -23,7 +23,105 @@ This repository was made as my solution to the exercise proposed in the 35th sec
 
 ### Light Theme
 
+<p align="center">
+  <img src="design-preview/login-activity-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Login Activity - Light Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/sign-up-activity-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Sign Up Activity - Light Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/main-content-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Main Content - Light Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/navigation-drawer-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Navigation Drawer - Light Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/task-form-activity-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Task Form Activity - Light Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/task-form-date-picker-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Task Form Date Picker - Light Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/filled-task-form-light-theme.png">
+</p>
+<p align="center">
+	<small><em>Filled Task Form - Light Theme</em></small>
+</p>
+
 ### Dark Theme
+
+  <p align="center">
+  <img src="design-preview/login-activity-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Login Activity - Dark Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/sign-up-activity-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Sign Up Activity - Dark Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/main-content-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Main Content - Dark Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/navigation-drawer-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Navigation Drawer - Dark Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/task-form-activity-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Task Form Activity - Dark Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/task-form-date-picker-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Task Form Date Picker - Dark Theme</em></small>
+</p>
+<br/>
+<p align="center">
+  <img src="design-preview/filled-task-form-dark-theme.png">
+</p>
+<p align="center">
+	<small><em>Filled Task Form - Dark Theme</em></small>
+</p>
 
 ## Valuable Resources
 

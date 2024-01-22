@@ -30,7 +30,7 @@
             android:name=".ui.activity.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activity.AddTaskActivity"
+            android:name=".ui.activity.TaskFormActivity"
             android:exported="false" />
     </application>
 

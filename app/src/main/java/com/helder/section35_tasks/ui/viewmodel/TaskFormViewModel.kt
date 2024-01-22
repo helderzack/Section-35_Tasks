@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class AddTaskViewModel(application: Application) : AndroidViewModel(application) {
+class TaskFormViewModel(application: Application) : AndroidViewModel(application) {
 
     private val priorityRepository = PriorityRepository(application.applicationContext)
     private val taskRepository = TaskRepository()

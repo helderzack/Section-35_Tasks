@@ -17,8 +17,7 @@ import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
 import com.helder.section35_tasks.service.listener.OnDialogOptions
 import com.helder.section35_tasks.service.listener.OnImageViewClicked
-import com.helder.section35_tasks.service.listener.TaskListener
-import com.helder.section35_tasks.ui.activity.AddTaskActivity
+import com.helder.section35_tasks.ui.activity.TaskFormActivity
 import com.helder.section35_tasks.ui.adapter.TasksAdapter
 import com.helder.section35_tasks.ui.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
@@ -38,7 +37,7 @@ abstract class BaseFragment : Fragment() {
         _binding = TasksFragmentsLayoutBinding.inflate(inflater, container, false)
 
         binding.floatingButtonAddTask.setOnClickListener {
-            startActivity(Intent(requireContext(), AddTaskActivity::class.java))
+            startActivity(Intent(requireContext(), TaskFormActivity::class.java))
         }
 
         viewModel = ViewModelProvider(this)[BaseViewModel::class.java]
@@ -53,7 +52,7 @@ abstract class BaseFragment : Fragment() {
             }
 
             override fun onTaskCardClicked(id: Int) {
-                val intent = Intent(requireActivity(), AddTaskActivity::class.java)
+                val intent = Intent(requireActivity(), TaskFormActivity::class.java)
                 intent.putExtra("taskId", id)
                 requireActivity().startActivity(intent)
             }

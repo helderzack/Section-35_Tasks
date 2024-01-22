@@ -13,29 +13,29 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.data.model.TaskModel
-import com.helder.section35_tasks.databinding.ActivityAddTaskBinding
+import com.helder.section35_tasks.databinding.ActivityTaskFormBinding
 import com.helder.section35_tasks.service.listener.DateListener
 import com.helder.section35_tasks.ui.fragment.DatePickerFragment
-import com.helder.section35_tasks.ui.viewmodel.AddTaskViewModel
+import com.helder.section35_tasks.ui.viewmodel.TaskFormViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class AddTaskActivity : AppCompatActivity(), OnClickListener {
+class TaskFormActivity : AppCompatActivity(), OnClickListener {
 
-    private lateinit var binding: ActivityAddTaskBinding
-    private lateinit var viewModel: AddTaskViewModel
+    private lateinit var binding: ActivityTaskFormBinding
+    private lateinit var viewModel: TaskFormViewModel
 
     private var dueDate = LocalDate.now()
     private lateinit var priorities: List<PriorityModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddTaskBinding.inflate(layoutInflater)
+        binding = ActivityTaskFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarAddTask)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel = ViewModelProvider(this)[AddTaskViewModel::class.java]
+        viewModel = ViewModelProvider(this)[TaskFormViewModel::class.java]
 
         binding.textDatePickerSelector.setOnClickListener(this)
         binding.buttonAddTask.setOnClickListener(this)
