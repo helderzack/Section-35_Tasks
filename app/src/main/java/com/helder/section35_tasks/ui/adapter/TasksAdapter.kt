@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TaskItemBinding
-import com.helder.section35_tasks.service.listener.OnImageViewClicked
+import com.helder.section35_tasks.service.listener.TaskListener
 import com.helder.section35_tasks.ui.viewholder.TasksViewHolder
 
-class TasksAdapter(private val listener: OnImageViewClicked) :
+class TasksAdapter(private val listener: TaskListener) :
     RecyclerView.Adapter<TasksViewHolder>() {
 
     private lateinit var binding: TaskItemBinding

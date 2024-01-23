@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
 import com.helder.section35_tasks.service.listener.OnDialogOptions
-import com.helder.section35_tasks.service.listener.OnImageViewClicked
+import com.helder.section35_tasks.service.listener.TaskListener
 import com.helder.section35_tasks.ui.activity.TaskFormActivity
 import com.helder.section35_tasks.ui.adapter.TasksAdapter
 import com.helder.section35_tasks.ui.viewmodel.BaseViewModel
@@ -42,7 +42,7 @@ abstract class BaseFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[BaseViewModel::class.java]
 
-        adapter = TasksAdapter(object : OnImageViewClicked {
+        adapter = TasksAdapter(object : TaskListener {
             override fun onTaskMarkedComplete(id: Int) {
                 viewModel.markComplete(id)
             }
@@ -51,7 +51,7 @@ abstract class BaseFragment : Fragment() {
                 viewModel.markIncomplete(id)
             }
 
-            override fun onTaskCardClicked(id: Int) {
+            override fun onTaskCardLongClick(id: Int) {
                 val intent = Intent(requireActivity(), TaskFormActivity::class.java)
                 intent.putExtra("taskId", id)
                 requireActivity().startActivity(intent)
@@ -62,8 +62,7 @@ abstract class BaseFragment : Fragment() {
                     override fun onDeleteClick() {
                         viewModel.deleteTask(id)
                     }
-                })
-                    .show(requireActivity().supportFragmentManager, "DELETE_DIALOG")
+                }).show(requireActivity().supportFragmentManager, "DELETE_DIALOG")
             }
         })
 

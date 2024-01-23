@@ -2,12 +2,12 @@ package com.helder.section35_tasks.service.listener
 
 interface TaskListener {
 
-    fun onListClick(id: Int)
+    fun onTaskMarkedComplete(id: Int)
 
-    fun onDeleteClick(id: Int)
+    fun onTaskMarkedIncomplete(id: Int)
 
-    fun onCompleteClick(id: Int)
+    fun onTaskCardLongClick(id: Int)
 
-    fun onIncompleteClick(id: Int)
+    fun onLongClickToRemoval(id: Int)
 
 }

@@ -31,10 +31,6 @@ class PriorityRepository(val context: Context) : BaseRepository() {
 
     }
 
-    fun getPriority(id: Int): String {
-       return database.getDescription(id)
-    }
-
     fun savePriorities(priorities: List<PriorityModel>) {
         database.clear()
         database.save(priorities)
