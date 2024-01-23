@@ -1,7 +1,6 @@
 package com.helder.section35_tasks.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -39,13 +38,10 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.getAllTasks(object : APIListener<List<TaskModel>> {
                 override fun onSuccess(result: List<TaskModel>) {
-                    Log.d("TASKS_FETCHING", result.toString())
                     _tasks.value = result
                 }
 
-                override fun onFailure(message: String) {
-                    Log.d("TASKS_FETCHING", message)
-                }
+                override fun onFailure(message: String) {}
             })
         }
     }
@@ -54,14 +50,10 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.getDueInSevenDaysTasks(object : APIListener<List<TaskModel>> {
                 override fun onSuccess(result: List<TaskModel>) {
-                    Log.d("TASKS_FETCHING", result.toString())
                     _tasks.value = result
                 }
 
-                override fun onFailure(message: String) {
-                    Log.d("TASKS_FETCHING", message)
-                }
-
+                override fun onFailure(message: String) {}
             })
         }
     }
@@ -70,13 +62,10 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.overdueTasks(object : APIListener<List<TaskModel>> {
                 override fun onSuccess(result: List<TaskModel>) {
-                    Log.d("TASKS_FETCHING", result.toString())
                     _tasks.value = result
                 }
 
-                override fun onFailure(message: String) {
-                    Log.d("TASKS_FETCHING", message)
-                }
+                override fun onFailure(message: String) {}
             })
         }
     }
@@ -85,12 +74,10 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.markComplete(id, object : APIListener<Boolean> {
                 override fun onSuccess(result: Boolean) {
-                    Log.d("UPDATE_TASK", "Was task updated? $result")
                     _wasTaskUpdated.value = ValidationModel()
                 }
 
                 override fun onFailure(message: String) {
-                    Log.d("UPDATE_TASK", "Task was not updated")
                     _wasTaskUpdated.value = ValidationModel(message)
                 }
             })
@@ -101,12 +88,10 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             taskRepository.markIncomplete(id, object : APIListener<Boolean> {
                 override fun onSuccess(result: Boolean) {
-                    Log.d("UPDATE_TASK", "Was task updated? $result")
                     _wasTaskUpdated.value = ValidationModel()
                 }
 
                 override fun onFailure(message: String) {
-                    Log.d("UPDATE_TASK", "Task was not updated")
                     _wasTaskUpdated.value = ValidationModel(message)
                 }
             })
@@ -120,9 +105,7 @@ class BaseViewModel(application: Application) : AndroidViewModel(application) {
                     _receivedPriorities.value = result
                 }
 
-                override fun onFailure(message: String) {
-
-                }
+                override fun onFailure(message: String) {}
             })
         }
     }

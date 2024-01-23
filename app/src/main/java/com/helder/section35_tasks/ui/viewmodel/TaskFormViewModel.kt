@@ -40,9 +40,7 @@ class TaskFormViewModel(application: Application) : AndroidViewModel(application
                     _task.value = result
                 }
 
-                override fun onFailure(message: String) {
-                    TODO("Not yet implemented")
-                }
+                override fun onFailure(message: String) {}
             })
         }
     }

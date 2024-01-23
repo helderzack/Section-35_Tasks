@@ -1,7 +1,6 @@
 package com.helder.section35_tasks.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -71,8 +70,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     _receivedPriorities.value = result
                 }
 
-                override fun onFailure(message: String) {
-                }
+                override fun onFailure(message: String) {}
             })
         }
     }

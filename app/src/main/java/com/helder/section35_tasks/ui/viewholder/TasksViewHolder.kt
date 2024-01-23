@@ -33,11 +33,9 @@ class TasksViewHolder(private val binding: TaskItemBinding) :
 
         binding.imageViewCompletedTask.setOnClickListener {
             if(task.complete) {
-                task.complete = false
                 listener.onTaskMarkedIncomplete(task.id)
                 binding.imageViewCompletedTask.setImageResource(R.drawable.ic_unchecked)
             } else {
-                task.complete = true
                 listener.onTaskMarkedComplete(task.id)
                 binding.imageViewCompletedTask.setImageResource(R.drawable.ic_checked)
             }
