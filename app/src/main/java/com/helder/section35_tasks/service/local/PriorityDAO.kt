@@ -15,6 +15,9 @@ interface PriorityDAO {
     @Insert
     fun save(priorities: List<PriorityModel>): LongArray
 
+    @Query("SELECT description FROM ${Constants.Database.PRIORITY_TABLE} WHERE id = :id")
+    fun getDescription(id: Int): String
+
     @Query("DELETE FROM ${Constants.Database.PRIORITY_TABLE}")
     fun clear()
 }

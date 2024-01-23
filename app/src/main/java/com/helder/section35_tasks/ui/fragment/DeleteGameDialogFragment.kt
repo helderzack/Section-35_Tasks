@@ -15,7 +15,7 @@ class DeleteGameDialogFragment(private val listener: OnDialogOptions) : DialogFr
                 .setMessage("Do you wan to delete the Task?")
                 .setPositiveButton("Yes") { _, _ ->
                     listener.onDeleteClick()
-                }.setNegativeButton("No") { _, _ -> }
+                }.setNeutralButton("Cancel", null)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
