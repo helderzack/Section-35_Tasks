@@ -14,6 +14,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.ActivityTaskFormBinding
+import com.helder.section35_tasks.service.constant.Constants
+import com.helder.section35_tasks.service.dateformatter.PreferredDateFormatter
 import com.helder.section35_tasks.service.listener.DateListener
 import com.helder.section35_tasks.ui.fragment.DatePickerFragment
 import com.helder.section35_tasks.ui.viewmodel.TaskFormViewModel
@@ -44,7 +46,7 @@ class TaskFormActivity : AppCompatActivity(), OnClickListener {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getPriorities()
 
-                val taskId = intent.extras?.getInt("taskId")
+                val taskId = intent.extras?.getInt(Constants.BUNDLE.TASK_ID)
 
                 if (taskId != null) {
                     viewModel.getTask(taskId)
@@ -91,10 +93,10 @@ class TaskFormActivity : AppCompatActivity(), OnClickListener {
         val datePickerFragment = DatePickerFragment(dueDate, object : DateListener {
             override fun onDateSet(selectedDate: LocalDate) {
                 dueDate = selectedDate
-                val formattedDate = "${dueDate.dayOfMonth} ${dueDate.month} ${dueDate.year}"
-                binding.textDatePickerSelector.text = formattedDate
-            }
 
+                val dateString = PreferredDateFormatter.formatDate(selectedDate.toString())
+                binding.textDatePickerSelector.text = dateString
+            }
         })
 
         datePickerFragment.show(supportFragmentManager, "datePicker")
@@ -107,9 +109,10 @@ class TaskFormActivity : AppCompatActivity(), OnClickListener {
         binding.spinnerTaskPriority.setSelection(priorityPosition - 1)
         binding.checkboxComplete.isChecked = task.complete
 
+        val dateString = PreferredDateFormatter.formatDate(task.dueDate.toString())
+        binding.textDatePickerSelector.text = dateString
+
         dueDate = task.dueDate
-        val formattedDate = "${dueDate.dayOfMonth} ${dueDate.month} ${dueDate.year}"
-        binding.textDatePickerSelector.text = formattedDate
     }
 
     private fun saveTask() {
@@ -117,7 +120,7 @@ class TaskFormActivity : AppCompatActivity(), OnClickListener {
         val isComplete = binding.checkboxComplete.isChecked
         val description = binding.editDescription.text.toString()
 
-        val taskId = intent.extras?.getInt("taskId") ?: 0
+        val taskId = intent.extras?.getInt(Constants.BUNDLE.TASK_ID) ?: 0
 
         val task = TaskModel(
             taskId,

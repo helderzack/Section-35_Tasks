@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/touch_target_height"
         android:background="?attr/colorPrimary"
-        android:text="@string/add_task_action"
+        android:text="@string/save_task_action"
         android:textColor="?attr/colorOnPrimary"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"

@@ -4,17 +4,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.helder.section35_tasks.R
 import com.helder.section35_tasks.data.model.TaskModel
 import com.helder.section35_tasks.databinding.TaskItemBinding
+import com.helder.section35_tasks.service.dateformatter.PreferredDateFormatter
 import com.helder.section35_tasks.service.listener.TaskListener
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class TasksViewHolder(private val binding: TaskItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(task: TaskModel, priority: String, listener: TaskListener) {
-        val dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        val date = LocalDate.parse(task.dueDate.toString())
-        val dateString = date.format(dateTimeFormatter)
+        val dateString = PreferredDateFormatter.formatDate(task.dueDate.toString())
 
         binding.textTaskDescription.text = task.description
         binding.textTaskPriority.text = priority
@@ -42,7 +39,7 @@ class TasksViewHolder(private val binding: TaskItemBinding) :
         }
 
         binding.cardViewTask.setOnClickListener {
-            listener.onTaskCardLongClick(task.id)
+            listener.onTaskCardClick(task.id)
         }
     }
 

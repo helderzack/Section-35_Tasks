@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.helder.section35_tasks.data.model.PriorityModel
 import com.helder.section35_tasks.databinding.TasksFragmentsLayoutBinding
+import com.helder.section35_tasks.service.constant.Constants
 import com.helder.section35_tasks.service.listener.OnDialogOptions
 import com.helder.section35_tasks.service.listener.TaskListener
 import com.helder.section35_tasks.ui.activity.TaskFormActivity
@@ -51,9 +52,11 @@ abstract class BaseFragment : Fragment() {
                 viewModel.markIncomplete(id)
             }
 
-            override fun onTaskCardLongClick(id: Int) {
+            override fun onTaskCardClick(id: Int) {
                 val intent = Intent(requireActivity(), TaskFormActivity::class.java)
-                intent.putExtra("taskId", id)
+                val bundle = Bundle()
+                bundle.putInt(Constants.BUNDLE.TASK_ID, id)
+                intent.putExtras(bundle)
                 requireActivity().startActivity(intent)
             }
 

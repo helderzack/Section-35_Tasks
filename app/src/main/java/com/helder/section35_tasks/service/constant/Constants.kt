@@ -18,4 +18,7 @@ class Constants {
         const val PRIORITY_TABLE = "priority"
     }
 
+    object BUNDLE {
+        const val TASK_ID = "taskId"
+    }
 }

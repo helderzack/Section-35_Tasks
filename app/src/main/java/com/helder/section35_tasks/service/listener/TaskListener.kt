@@ -6,7 +6,7 @@ interface TaskListener {
 
     fun onTaskMarkedIncomplete(id: Int)
 
-    fun onTaskCardLongClick(id: Int)
+    fun onTaskCardClick(id: Int)
 
     fun onLongClickToRemoval(id: Int)
 
