@@ -14,7 +14,7 @@ import com.helder.section35_tasks.service.repository.PersonRepository
 
 class SignUpViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = PersonRepository()
+    private val repository = PersonRepository(application.applicationContext)
     private val securityPreferences = SecurityPreferences(application.applicationContext)
 
     private val _signUp = MutableLiveData<ValidationModel>()

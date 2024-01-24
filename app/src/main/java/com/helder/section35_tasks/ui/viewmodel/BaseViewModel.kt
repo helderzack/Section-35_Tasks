@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val taskRepository = TaskRepository()
+    private val taskRepository = TaskRepository(application.applicationContext)
     private val priorityRepository = PriorityRepository(application.applicationContext)
 
     private val _tasks = MutableStateFlow<List<TaskModel>>(mutableListOf())

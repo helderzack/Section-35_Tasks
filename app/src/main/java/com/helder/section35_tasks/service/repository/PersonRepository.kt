@@ -1,11 +1,12 @@
 package com.helder.section35_tasks.service.repository
 
+import android.content.Context
 import com.helder.section35_tasks.data.model.PersonModel
 import com.helder.section35_tasks.service.listener.APIListener
 import com.helder.section35_tasks.service.remote.PersonService
 import com.helder.section35_tasks.service.remote.RetrofitClient
 
-class PersonRepository: BaseRepository() {
+class PersonRepository(context: Context) : BaseRepository(context) {
 
     private val personService = RetrofitClient.getService(PersonService::class.java)
 

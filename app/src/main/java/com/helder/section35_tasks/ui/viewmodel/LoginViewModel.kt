@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = PersonRepository()
+    private val repository = PersonRepository(application.applicationContext)
     private val priorityRepository = PriorityRepository(application.applicationContext)
     private val securityPreferences = SecurityPreferences(application.applicationContext)
 

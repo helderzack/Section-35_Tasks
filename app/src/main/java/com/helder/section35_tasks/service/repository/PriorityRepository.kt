@@ -7,7 +7,7 @@ import com.helder.section35_tasks.service.local.TaskDatabase
 import com.helder.section35_tasks.service.remote.PriorityService
 import com.helder.section35_tasks.service.remote.RetrofitClient
 
-class PriorityRepository(val context: Context) : BaseRepository() {
+class PriorityRepository(context: Context) : BaseRepository(context) {
 
     private val priorityService = RetrofitClient.getService(PriorityService::class.java)
     private val database = TaskDatabase.getDatabase(context).priorityDao()
