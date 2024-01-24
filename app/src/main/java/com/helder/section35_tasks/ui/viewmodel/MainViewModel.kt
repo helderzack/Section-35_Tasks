@@ -15,6 +15,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val _logout = MutableLiveData(false)
     val logout: LiveData<Boolean> = _logout
 
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName
+
     fun doLogout() {
         securityPreferences.remove(Constants.RequestHeaders.TOKEN)
         securityPreferences.remove(Constants.RequestHeaders.PERSON_KEY)
@@ -24,4 +27,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
         _logout.value = true
     }
+
+    fun loadUserName() {
+        _userName.value = securityPreferences.get(Constants.RequestHeaders.NAME)
+    }
+
 }

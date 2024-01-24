@@ -2,6 +2,7 @@ package com.helder.section35_tasks.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +53,8 @@ class SignUpActivity : AppCompatActivity() {
             if(it.status()) {
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
+            } else {
+                Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
             }
         }
     }

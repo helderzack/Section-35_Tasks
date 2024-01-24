@@ -3,6 +3,7 @@ package com.helder.section35_tasks.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -68,6 +69,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setCheckedItem(R.id.all_tasks)
         navView.setNavigationItemSelectedListener(this)
 
+        viewModel.loadUserName()
+
         observe()
     }
 
@@ -106,6 +109,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
             }
+        }
+
+        viewModel.userName.observe(this) {
+            val header = binding.navView.getHeaderView(0)
+            header.findViewById<TextView>(R.id.text_name).text = it
         }
     }
 
