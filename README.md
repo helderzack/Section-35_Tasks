@@ -1,7 +1,8 @@
 
+
 # Tasks
 
-This repository was made as my solution to the exercise proposed in the 35th section of   the [App Development Using Kotlin](https://www.udemy.com/course/curso-desenvolvedor-kotlin/)   course - *Desenvolvimento de Aplicativos Android Usando Kotlin*, in portuguese. The way I have   approached the development of this app is simple: first I've tried to code the app as close as possible to the result intended by the teacher. Then, I'll check the section to see how the teacher tackled the development of this app. This is the third exercise from this course that I have pushed  to GitHub.
+This repository was made as my solution to the exercise proposed in the 35th section of the [App Development Using Kotlin](https://www.udemy.com/course/curso-desenvolvedor-kotlin/) course - *Desenvolvimento de Aplicativos Android Usando Kotlin*, in portuguese. The way I have approached the development of this app is simple: first I've tried to code the app as close as possible to the result intended by the teacher. Then, I'll check the section to see how the teacher tackled the development of this app. This is the third exercise from this course that I have pushed to GitHub.
 
 ## Table of contents
 
@@ -17,111 +18,133 @@ This repository was made as my solution to the exercise proposed in the 35th sec
 
 ### The challenge
 
+Users should be able to:
+- Register an account with name, email and password
+- Login with email and password
+- See all saved tasks
+- See tasks due in the next seven days
+- See overdue tasks
+- Create tasks. Each task has a description, a priority assigned to the task, a complete or incomplete status and a due date to complete the task
+- Update tasks info
+- Mark task complete or incomplete
+
 ### What I learned
+
+Some of the things I have learned to do while coding this app were:
+- Utilize a view model to manipulate data which will be shown in fragment
+- Use coroutines and flows to be able to execute http requests with Retrofit
+- How to utilize listeners to communicate between layers
+- How to better utilize generics by creating generic functions, and generic interface methods
+- Use Retrofit to fetch data from a remote REST API
+- Use Retrofit to fetch data to a remote REST API
+- How to format dates to a specific format
+- How to use shared preferences to save data
+
+It is important to know that I have expanded all the knowledge acquired from the previous project, linked in the final section of this document.
 
 ## Design Preview
 
 ### Light Theme
 
-<p align="center">
-  <img src="design-preview/login-activity-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Login Activity - Light Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/sign-up-activity-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Sign Up Activity - Light Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/main-content-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Main Content - Light Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/navigation-drawer-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Navigation Drawer - Light Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/task-form-activity-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Task Form Activity - Light Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/task-form-date-picker-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Task Form Date Picker - Light Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/filled-task-form-light-theme.png">
-</p>
-<p align="center">
-	<small><em>Filled Task Form - Light Theme</em></small>
-</p>
+<p align="center">  
+<img src="design-preview/login-activity-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Login Activity - Light Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/sign-up-activity-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Sign Up Activity - Light Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/main-content-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Main Content - Light Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/navigation-drawer-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Navigation Drawer - Light Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/task-form-activity-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Task Form Activity - Light Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/task-form-date-picker-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Task Form Date Picker - Light Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/filled-task-form-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Filled Task Form - Light Theme</em></small>  
+</p>  
 
 ### Dark Theme
 
-  <p align="center">
-  <img src="design-preview/login-activity-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Login Activity - Dark Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/sign-up-activity-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Sign Up Activity - Dark Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/main-content-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Main Content - Dark Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/navigation-drawer-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Navigation Drawer - Dark Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/task-form-activity-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Task Form Activity - Dark Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/task-form-date-picker-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Task Form Date Picker - Dark Theme</em></small>
-</p>
-<br/>
-<p align="center">
-  <img src="design-preview/filled-task-form-dark-theme.png">
-</p>
-<p align="center">
-	<small><em>Filled Task Form - Dark Theme</em></small>
-</p>
+<p align="center">  
+<img src="design-preview/login-activity-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Login Activity - Dark Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/sign-up-activity-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Sign Up Activity - Dark Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/main-content-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Main Content - Dark Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/navigation-drawer-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Navigation Drawer - Dark Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/task-form-activity-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Task Form Activity - Dark Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/task-form-date-picker-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Task Form Date Picker - Dark Theme</em></small>  
+</p>  
+<br/>  
+<p align="center">  
+<img src="design-preview/filled-task-form-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Filled Task Form - Dark Theme</em></small>  
+</p>  
 
 ## Valuable Resources
 
