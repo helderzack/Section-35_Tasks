@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/shape_background"
     tools:context=".ui.activity.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -34,48 +35,48 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="@dimen/full_constraint_width"
+    <ImageView
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:title="Tasks" />
+        android:layout_marginTop="@dimen/margin_double"
+        android:contentDescription="@string/app_logo"
+        android:src="@drawable/ic_logotipo"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_email"
-        android:layout_width="@dimen/full_constraint_width"
-        android:layout_height="@dimen/touch_target_height"
+        style="@style/DefaultEditText"
         android:autofillHints="emailAddress"
+        android:drawableStart="@drawable/ic_mail"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/guideline_top"
-        app:layout_constraintWidth_max="@dimen/edit_text_max_width" />
+        tools:text="Email" />
 
     <EditText
         android:id="@+id/edit_password"
-        android:layout_width="@dimen/full_constraint_width"
-        android:layout_height="@dimen/touch_target_height"
+        style="@style/DefaultEditText"
         android:layout_marginTop="16dp"
         android:autofillHints="password"
+        android:drawableStart="@drawable/ic_lock"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/edit_email"
-        app:layout_constraintWidth_max="@dimen/edit_text_max_width" />
+        tools:text="Password" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_login"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_quadruple"
-        android:backgroundTint="?attr/colorPrimary"
         android:text="@string/login_action"
-        android:textColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/edit_password" />
@@ -85,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/touch_target_height"
         android:text="@string/does_not_have_an_account"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="@dimen/text_size_double"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toStartOf="@id/text_create_account_action"
@@ -99,6 +101,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/navigate_to_register"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="@dimen/text_size_double"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"

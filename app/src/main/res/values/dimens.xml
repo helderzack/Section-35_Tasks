@@ -10,6 +10,12 @@
     <dimen name="margin_double">32dp</dimen>
     <dimen name="margin_quadruple">64dp</dimen>
 
+    <dimen name="padding_one_third">4dp</dimen>
+    <dimen name="padding_half">8dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="padding_double">32dp</dimen>
+    <dimen name="padding_quadruple">64dp</dimen>
+
     <dimen name="full_constraint_width">0dp</dimen>
     <dimen name="full_constraint_height">0dp</dimen>
 

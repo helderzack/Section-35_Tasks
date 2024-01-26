@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 

@@ -36,9 +36,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_add_task"
-        android:layout_width="@dimen/full_constraint_width"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        style="@style/DefaultToolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,8 +51,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/guideline_top"
-        app:layout_constraintWidth_max="@dimen/edit_text_max_width" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_top" />
 
     <TextView
         android:id="@+id/text_spinner_title"
@@ -103,12 +100,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_add_task"
+        style="@style/DefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/touch_target_height"
-        android:background="?attr/colorPrimary"
         android:text="@string/save_task_action"
-        android:textColor="?attr/colorOnPrimary"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start" />

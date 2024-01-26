@@ -160,6 +160,14 @@ Setting Custom ActionBar Title from Fragment: https://www.youtube.com/watch?v=EJ
 
 Implement Email Validator in Android: https://www.geeksforgeeks.org/implement-email-validator-in-android/
 
+Retrofit documentation: https://square.github.io/retrofit/
+
+Coroutines official documentation: https://kotlinlang.org/docs/coroutines-overview.html
+
+Save data in a local database using Room: https://developer.android.com/training/data-storage/room
+
+The Ultimate Guide to Kotlin Flows: https://www.youtube.com/playlist?list=PLQkwcJG4YTCQHCppNAQmLsj_jW38rU9sC
+
 ## Link to previous lesson from the course
 
 [Section 31 - Guests](https://github.com/helderzack/section-31st_guests)

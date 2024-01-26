@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/nav_drawer_header_background"
+    android:background="@drawable/shape_background"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginTop="@dimen/margin_double"
         android:contentDescription="@string/app_logo"
-        android:src="@mipmap/ic_tasks_logo_foreground" />
+        android:src="@drawable/ic_logotipo" />
 
     <TextView
         android:id="@+id/text_name"
