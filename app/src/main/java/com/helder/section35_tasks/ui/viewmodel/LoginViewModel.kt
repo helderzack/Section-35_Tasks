@@ -14,13 +14,14 @@ import com.helder.section35_tasks.service.listener.APIListener
 import com.helder.section35_tasks.service.remote.RetrofitClient
 import com.helder.section35_tasks.service.repository.PersonRepository
 import com.helder.section35_tasks.service.repository.PriorityRepository
+import com.helder.section35_tasks.util.BiometricHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel(private val application: Application) : AndroidViewModel(application) {
 
     private val repository = PersonRepository(application.applicationContext)
     private val priorityRepository = PriorityRepository(application.applicationContext)
@@ -53,14 +54,16 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun verifyLoggedUser() {
+    fun verifyAuthentication() {
         val token = securityPreferences.get(Constants.RequestHeaders.TOKEN)
         val personKey = securityPreferences.get(Constants.RequestHeaders.PERSON_KEY)
 
         // If user is not logged in, empty strings will be passed as headers
         RetrofitClient.addHeaders(token, personKey)
 
-        _loggedUser.value = (token != "" && personKey != "")
+        val logged = (token != "" && personKey != "")
+
+        _loggedUser.value = logged && BiometricHelper.isBiometricAuthenticationAvailable(application.applicationContext)
     }
 
     fun getPriorities() {

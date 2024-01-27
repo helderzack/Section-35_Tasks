@@ -7,6 +7,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,12 +16,17 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.helder.section35_tasks.R
 import com.helder.section35_tasks.databinding.ActivityLoginBinding
 import com.helder.section35_tasks.ui.viewmodel.LoginViewModel
+import com.helder.section35_tasks.util.BiometricHelper
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executor
 
 class LoginActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +39,7 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
         binding.textCreateAccountAction.setOnClickListener(this)
         binding.buttonLogin.setOnClickListener(this)
 
-        viewModel.verifyLoggedUser()
+        viewModel.verifyAuthentication()
 
         observe()
     }
@@ -42,8 +49,7 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
             this
         ) {
             if (it) {
-                startActivity(Intent(applicationContext, MainActivity::class.java))
-                finish()
+                promptBiometricLogin()
             } else {
                 lifecycleScope.launch {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -131,4 +137,51 @@ class LoginActivity : AppCompatActivity(), OnClickListener {
 
         return true
     }
+
+    private fun promptBiometricLogin() {
+        if (BiometricHelper.isBiometricAuthenticationAvailable(this)) {
+            executor = ContextCompat.getMainExecutor(this)
+
+            biometricPrompt =
+                BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                        super.onAuthenticationError(errorCode, errString)
+                        Toast.makeText(
+                            applicationContext,
+                            "Authentication Error: $errString",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        Toast.makeText(
+                            applicationContext,
+                            "Authentication Failed!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                        super.onAuthenticationSucceeded(result)
+                        Toast.makeText(
+                            applicationContext,
+                            "User is authenticated",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        startActivity(Intent(applicationContext, MainActivity::class.java))
+                        finish()
+                    }
+                })
+
+            promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login!")
+                .setSubtitle("Please log in using your biometric credential")
+                .setNegativeButtonText("Don't authenticate")
+                .build()
+
+            biometricPrompt.authenticate(promptInfo)
+        }
+    }
+
 }
