@@ -1,5 +1,6 @@
 
 
+
 # Tasks
 
 This repository was made as my solution to the exercise proposed in the 35th section of the [App Development Using Kotlin](https://www.udemy.com/course/curso-desenvolvedor-kotlin/) course - *Desenvolvimento de Aplicativos Android Usando Kotlin*, in portuguese. The way I have approached the development of this app is simple: first I've tried to code the app as close as possible to the result intended by the teacher. Then, I'll check the section to see how the teacher tackled the development of this app. This is the third exercise from this course that I have pushed to GitHub.
@@ -93,6 +94,12 @@ It is important to know that I have expanded all the knowledge acquired from the
 </p>  
 <p align="center">  
 <small><em>Filled Task Form - Light Theme</em></small>  
+</p>
+<p align="center">  
+<img src="design-preview/biometric-authentication-light-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Biometric Authentication - Light Theme</em></small>  
 </p>  
 
 ### Dark Theme
@@ -145,6 +152,12 @@ It is important to know that I have expanded all the knowledge acquired from the
 <p align="center">  
 <small><em>Filled Task Form - Dark Theme</em></small>  
 </p>  
+<p align="center">  
+<img src="design-preview/biometric-authentication-dark-theme.png">  
+</p>  
+<p align="center">  
+<small><em>Biometric Authentication - Dark Theme</em></small>  
+</p>  
 
 ## Valuable Resources
 
@@ -167,6 +180,8 @@ Coroutines official documentation: https://kotlinlang.org/docs/coroutines-overvi
 Save data in a local database using Room: https://developer.android.com/training/data-storage/room
 
 The Ultimate Guide to Kotlin Flows: https://www.youtube.com/playlist?list=PLQkwcJG4YTCQHCppNAQmLsj_jW38rU9sC
+
+Show a Biometric Authentication Dialog: https://developer.android.com/training/sign-in/biometric-auth
 
 ## Link to previous lesson from the course
 
