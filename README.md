@@ -37,7 +37,7 @@ Some of the things I have learned to do while coding this app were:
 - How to utilize listeners to communicate between layers
 - How to better utilize generics by creating generic functions, and generic interface methods
 - Use Retrofit to fetch data from a remote REST API
-- Use Retrofit to fetch data to a remote REST API
+- Use Retrofit to send data to a remote REST API
 - How to format dates to a specific format
 - How to use shared preferences to save data
 
